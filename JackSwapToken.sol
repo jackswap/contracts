@@ -3,7 +3,7 @@ pragma solidity 0.6.12;
 import "./BEP20.sol";
 
 // JackSwap Token with Governance.
-contract JackSwapToken is BEP20("JackSwap Token", "CCAKE") {
+contract JackSwapToken is BEP20("JackSwap Token", "JACK") {
     constructor(uint256 initial) public {
         _mint(msg.sender, initial); // to start farming and staking, and airdrop purposes
     }
@@ -118,13 +118,13 @@ contract JackSwapToken is BEP20("JackSwap Token", "CCAKE") {
         address signatory = ecrecover(digest, v, r, s);
         require(
             signatory != address(0),
-            "CCAKE::delegateBySig: invalid signature"
+            "JACK::delegateBySig: invalid signature"
         );
         require(
             nonce == nonces[signatory]++,
-            "CCAKE::delegateBySig: invalid nonce"
+            "JACK::delegateBySig: invalid nonce"
         );
-        require(now <= expiry, "CCAKE::delegateBySig: signature expired");
+        require(now <= expiry, "JACK::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -153,7 +153,7 @@ contract JackSwapToken is BEP20("JackSwap Token", "CCAKE") {
     {
         require(
             blockNumber < block.number,
-            "CCAKE::getPriorVotes: not yet determined"
+            "JACK::getPriorVotes: not yet determined"
         );
 
         uint32 nCheckpoints = numCheckpoints[account];
@@ -236,7 +236,7 @@ contract JackSwapToken is BEP20("JackSwap Token", "CCAKE") {
         uint32 blockNumber =
             safe32(
                 block.number,
-                "CCAKE::_writeCheckpoint: block number exceeds 32 bits"
+                "JACK::_writeCheckpoint: block number exceeds 32 bits"
             );
 
         if (
